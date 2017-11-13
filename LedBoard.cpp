@@ -10,25 +10,20 @@
 #endif
 
 
-LedBoard::LedBoard() {
-    LedBoard::LedBoard(LEDBOARD_DEFAULT_PIN);
-}
+LedBoard::LedBoard() : LedBoard(LEDBOARD_DEFAULT_PIN) {}
 
-LedBoard::LedBoard(uint8_t pin) {
-    LedBoard::LedBoard(pin, LEDBOARD_DEFAULT_HEIGHT, LEDBOARD_DEFAULT_WIDTH);
-}
+LedBoard::LedBoard(uint8_t pin) : LedBoard(pin, LEDBOARD_DEFAULT_HEIGHT, LEDBOARD_DEFAULT_WIDTH) {}
 
-LedBoard::LedBoard(uint8_t pin, uint16_t height, uint16_t width) {
-    LedBoard::LedBoard(pin, height, width, LEDBOARD_DEFAULT_DIGIT_COUNT);
-}
+LedBoard::LedBoard(uint8_t pin, uint16_t height, uint16_t width)
+        : LedBoard(pin, height, width, LEDBOARD_DEFAULT_DIGIT_COUNT) {}
 
-LedBoard::LedBoard(uint8_t pin, uint16_t height, uint16_t width, uint8_t digit_count) {
+LedBoard::LedBoard(uint8_t pin, uint16_t height, uint16_t width, uint8_t digit_count)
+        : board_height(height), board_width(width), digit_offset(height*width)
+{
     led_strip = Adafruit_NeoPixel(width * height + (7 * digitCount), pin, NEO_GRB + NEO_KHZ800);
 }
 
 void LedBoard::begin() {
-    digitOffset = xyToPixel(x, y) + 1;
-
     led_strip.begin();
     show();
 }
